@@ -2,386 +2,448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Question for Mizana 💫</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+  <title>A Little Question for Mizana 💫</title>
+
+  <style>
     * {
-        box-sizing: border-box;
+      box-sizing: border-box;
     }
 
     body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        color: #333;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #ffb6d9, #8e44ad 45%, #24123b);
+      overflow: hidden;
+      color: white;
     }
 
     .hearts {
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        overflow: hidden;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
 
     .heart {
-        position: absolute;
-        bottom: -50px;
-        font-size: 25px;
-        animation: floatUp 7s linear infinite;
-        opacity: 0.7;
+      position: absolute;
+      bottom: -50px;
+      font-size: 25px;
+      animation: floatUp linear forwards;
+      opacity: 0.8;
     }
 
     @keyframes floatUp {
-        from {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0;
-        }
-        20% {
-            opacity: 0.8;
-        }
-        to {
-            transform: translateY(-110vh) rotate(360deg);
-            opacity: 0;
-        }
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .card {
-        width: min(90%, 520px);
-        padding: 35px;
-        text-align: center;
-        background: rgba(255,255,255,0.92);
-        border-radius: 25px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        position: relative;
-        z-index: 2;
-    }
-
-    h1 {
-        color: #e91e63;
-        margin-top: 0;
+      width: min(92%, 550px);
+      min-height: 520px;
+      padding: 35px;
+      text-align: center;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      position: relative;
+      z-index: 2;
     }
 
     .emoji {
-        font-size: 65px;
-        margin: 10px;
+      font-size: 70px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.12);
+      }
+    }
+
+    h1 {
+      font-size: 34px;
+      margin: 15px 0;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
     }
 
     .question {
-        font-size: 25px;
-        font-weight: bold;
-        margin: 25px 0;
+      font-size: 26px;
+      font-weight: bold;
+      margin: 35px 0;
     }
 
     button {
-        border: none;
-        padding: 13px 28px;
-        margin: 8px;
-        border-radius: 30px;
-        font-size: 17px;
-        cursor: pointer;
-        transition: 0.2s;
+      border: none;
+      padding: 15px 28px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
     .yes {
-        background: #e91e63;
-        color: white;
+      background: #ff4f9a;
+      color: white;
+      box-shadow: 0 8px 25px rgba(255,79,154,0.4);
     }
 
     .yes:hover {
-        transform: scale(1.08);
+      transform: scale(1.08);
     }
 
     .no {
-        background: #ddd;
-        color: #333;
-    }
-
-    .hidden {
-        display: none;
+      background: white;
+      color: #8e44ad;
+      position: relative;
+      margin-left: 12px;
     }
 
     .progress {
-        height: 7px;
-        background: #eee;
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 25px;
+      margin-top: 25px;
+      font-size: 14px;
+      opacity: 0.7;
     }
 
-    .progress-bar {
-        height: 100%;
-        width: 33%;
-        background: #e91e63;
-        transition: width 0.4s;
+    .hidden {
+      display: none;
     }
 
-    .result {
-        font-size: 23px;
-        line-height: 1.6;
+    .reveal {
+      animation: reveal 0.7s ease;
     }
 
-    .prank {
-        font-size: 16px;
-        margin-top: 20px;
-        color: #777;
+    @keyframes reveal {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
-        border: 5px solid #fff;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      width: 160px;
+      height: 160px;
+      margin: 15px auto;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 70px;
+      background: linear-gradient(135deg, #ff9acb, #b46cff);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
-</style>
+
+    .small {
+      font-size: 14px;
+      opacity: 0.75;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="hearts">
-    <div class="heart" style="left:5%;animation-delay:0s;">❤️</div>
-    <div class="heart" style="left:20%;animation-delay:2s;">💗</div>
-    <div class="heart" style="left:40%;animation-delay:4s;">💕</div>
-    <div class="heart" style="left:60%;animation-delay:1s;">💖</div>
-    <div class="heart" style="left:80%;animation-delay:3s;">💘</div>
-    <div class="heart" style="left:92%;animation-delay:5s;">❤️</div>
-</div>
+<div class="hearts" id="hearts"></div>
 
 <div class="card">
 
-    <!--
-    OPTIONAL:
-    Put a picture in the same folder and name it:
-    mizana.jpg
+  <!-- Question 1 -->
+  <div id="q1">
+    <div class="emoji">👋</div>
 
-    Then remove the comments around the image below.
-    -->
+    <h1>Hey, Mizana Bibi!</h1>
 
-    <!--
-    <img src="mizana.jpg" class="photo" alt="Mizana">
-    -->
+    <p>
+      I have a tiny three-question challenge for you.
+      Don't overthink it. 😄
+    </p>
 
-    <h1>Hey Mizana Bibi! 🌸</h1>
+    <div class="question">
+      Ready?
+    </div>
+
+    <button class="yes" onclick="nextQuestion(1)">
+      Yes 😌
+    </button>
+
+    <button class="no" onclick="nextQuestion(1)">
+      I'm curious 👀
+    </button>
 
     <div class="progress">
-        <div class="progress-bar" id="progress"></div>
+      Question 1 of 3
+    </div>
+  </div>
+
+
+  <!-- Question 2 -->
+  <div id="q2" class="hidden">
+
+    <div class="emoji">✨</div>
+
+    <h1>Okay, Mizana...</h1>
+
+    <p>
+      Be honest. What would you do if someone suddenly
+      told you that you're really interesting?
+    </p>
+
+    <div class="question">
+      Would you smile? 😊
     </div>
 
-    <!-- QUESTION 1 -->
-    <div id="q1">
-        <div class="emoji">😊</div>
+    <button class="yes" onclick="nextQuestion(2)">
+      Obviously 😄
+    </button>
 
-        <div class="question">
-            Mizana, can I ask you something?
-        </div>
+    <button class="no" onclick="nextQuestion(2)">
+      Maybe...
+    </button>
 
-        <button class="yes" onclick="nextQuestion(2)">
-            Of course 💕
-        </button>
+    <div class="progress">
+      Question 2 of 3
+    </div>
+  </div>
 
-        <button class="no" onclick="nextQuestion(2)">
-            Not really 😅
-        </button>
+
+  <!-- Question 3 -->
+  <div id="q3" class="hidden">
+
+    <div class="emoji">💗</div>
+
+    <h1>Final Question</h1>
+
+    <p>
+      Okay... this is the serious one.
+    </p>
+
+    <div class="question">
+      Do you love me? 👀
     </div>
 
-    <!-- QUESTION 2 -->
-    <div id="q2" class="hidden">
+    <button class="yes" onclick="answerYes()">
+      YES ❤️
+    </button>
 
-        <div class="emoji">👀</div>
+    <button
+      class="no"
+      id="noButton"
+      onclick="answerNo()"
+      onmouseenter="dodgeNo()"
+      ontouchstart="dodgeNo()">
+      NO 😭
+    </button>
 
-        <div class="question">
-            Do you think I'm a little crazy?
-        </div>
+    <p class="small">
+      Choose carefully... 😂
+    </p>
 
-        <button class="yes" onclick="nextQuestion(3)">
-            Maybe 😂
-        </button>
-
-        <button class="no" onclick="nextQuestion(3)">
-            Definitely 😭
-        </button>
-
+    <div class="progress">
+      Question 3 of 3
     </div>
+  </div>
 
-    <!-- QUESTION 3 -->
-    <div id="q3" class="hidden">
 
-        <div class="emoji">💖</div>
+  <!-- YES RESULT -->
+  <div id="yesResult" class="hidden reveal">
 
-        <div class="question">
-            Mizana... do you love me? 👀❤️
-        </div>
+    <div class="photo">😂</div>
 
-        <button class="yes" onclick="sayYes()">
-            YES ❤️
-        </button>
+    <h1>WAIT... WHAT?!</h1>
 
-        <button class="no" id="noButton">
-            NO 😭
-        </button>
+    <p>
+      Mizana Bibi said <strong>YES!</strong> 😭❤️
+    </p>
 
-        <p style="font-size:13px;color:#888;">
-            You can choose either answer 😌
-        </p>
+    <p>
+      Okay okay... don't panic.
+    </p>
 
-    </div>
+    <h2>IT WAS A PRANK! 😂</h2>
 
-    <!-- RESULT -->
-    <div id="result" class="hidden">
+    <p>
+      I got a dare from my friend to make this little
+      website and see what you would answer.
+    </p>
 
-        <div class="emoji">🤣🎉</div>
+    <p>
+      You actually made it to the end. 😭😂
+    </p>
 
-        <div class="result">
-            <strong>HAHA! Mizana! 😂</strong>
-            <br><br>
+  </div>
 
-            You actually clicked YES! ❤️
-            <br><br>
 
-            But don't panic...
-        </div>
+  <!-- NO RESULT -->
+  <div id="noResult" class="hidden reveal">
 
-        <div class="prank">
-            😭 It was just a prank!<br>
-            I got a dare from my friend to ask you this.
-            <br><br>
-            Don't take it seriously 😂❤️
-        </div>
+    <div class="photo">😂</div>
 
-    </div>
+    <h1>HAHA! 😭</h1>
+
+    <p>
+      You clicked NO!
+    </p>
+
+    <p>
+      Fair enough, Mizana. 😂
+    </p>
+
+    <h2>THE PRANK IS OVER 🎉</h2>
+
+    <p>
+      I got a dare from my friend to create this
+      ridiculous little website.
+    </p>
+
+  </div>
 
 </div>
 
+
 <script>
 
-function nextQuestion(number) {
+  let dodgeCount = 0;
 
-    document.getElementById("q1").classList.add("hidden");
-    document.getElementById("q2").classList.add("hidden");
-    document.getElementById("q3").classList.add("hidden");
+  function nextQuestion(current) {
 
-    document.getElementById("q" + number).classList.remove("hidden");
+    document.getElementById("q" + current)
+      .classList.add("hidden");
 
-    let progress = document.getElementById("progress");
-
-    if (number === 2) {
-        progress.style.width = "66%";
-    }
-
-    if (number === 3) {
-        progress.style.width = "100%";
-    }
-}
+    document.getElementById("q" + (current + 1))
+      .classList.remove("hidden");
+  }
 
 
-const noButton = document.getElementById("noButton");
+  function dodgeNo() {
 
-/*
-    Playful movement:
-    When the mouse approaches the NO button,
-    it moves to another location.
+    const button = document.getElementById("noButton");
 
-    It remains clickable, so Mizana can still
-    choose NO if she really wants to.
-*/
+    dodgeCount++;
 
-noButton.addEventListener("mouseenter", function () {
+    /*
+      The button moves around the card,
+      but remains clickable.
+    */
 
-    const maxX = window.innerWidth - noButton.offsetWidth - 30;
-    const maxY = window.innerHeight - noButton.offsetHeight - 30;
+    const card = document.querySelector(".card");
+
+    const cardRect = card.getBoundingClientRect();
+
+    const maxX = cardRect.width - button.offsetWidth - 30;
+    const maxY = cardRect.height - button.offsetHeight - 30;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
 
-    noButton.style.position = "fixed";
-    noButton.style.left = x + "px";
-    noButton.style.top = y + "px";
-});
+    button.style.position = "fixed";
+    button.style.left = (cardRect.left + x) + "px";
+    button.style.top = (cardRect.top + y) + "px";
 
+    /*
+      After several dodges, slow it down slightly
+      so the user can still choose NO.
+    */
 
-noButton.addEventListener("click", function () {
-
-    document.getElementById("q3").innerHTML = `
-        <div class="emoji">😂</div>
-
-        <div class="question">
-            Fair enough!
-        </div>
-
-        <p style="font-size:20px;">
-            You chose NO! 😭
-        </p>
-
-        <button class="yes" onclick="showPrank()">
-            Continue 😌
-        </button>
-    `;
-
-});
-
-
-function sayYes() {
-
-    document.getElementById("q3").classList.add("hidden");
-    document.getElementById("result").classList.remove("hidden");
-
-    createConfetti();
-}
-
-
-function showPrank() {
-
-    document.getElementById("q3").classList.add("hidden");
-    document.getElementById("result").classList.remove("hidden");
-
-    createConfetti();
-}
-
-
-function createConfetti() {
-
-    for (let i = 0; i < 60; i++) {
-
-        const confetti = document.createElement("div");
-
-        confetti.innerHTML = ["❤️","💖","💕","😂","🎉","✨"]
-            [Math.floor(Math.random() * 6)];
-
-        confetti.style.position = "fixed";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-30px";
-        confetti.style.fontSize = "25px";
-        confetti.style.zIndex = "10";
-
-        document.body.appendChild(confetti);
-
-        const duration = 2 + Math.random() * 3;
-
-        confetti.animate(
-            [
-                { transform: "translateY(0) rotate(0deg)" },
-                { transform: `translateY(110vh) rotate(720deg)` }
-            ],
-            {
-                duration: duration * 1000,
-                easing: "linear"
-            }
-        );
-
-        setTimeout(() => {
-            confetti.remove();
-        }, duration * 1000);
+    if (dodgeCount >= 8) {
+      button.style.transform =
+        "rotate(" + (Math.random() * 20 - 10) + "deg)";
     }
-}
+  }
+
+
+  function answerYes() {
+
+    document.getElementById("q3")
+      .classList.add("hidden");
+
+    document.getElementById("yesResult")
+      .classList.remove("hidden");
+
+    createHearts(35);
+  }
+
+
+  function answerNo() {
+
+    document.getElementById("q3")
+      .classList.add("hidden");
+
+    document.getElementById("noResult")
+      .classList.remove("hidden");
+
+    createHearts(15);
+  }
+
+
+  function createHearts(amount) {
+
+    const container = document.getElementById("hearts");
+
+    for (let i = 0; i < amount; i++) {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const emojis = ["❤️", "💕", "💗", "💖", "✨", "😂"];
+
+      heart.innerHTML =
+        emojis[Math.floor(Math.random() * emojis.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "%";
+
+      heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+      heart.style.animationDelay =
+        Math.random() * 2 + "s";
+
+      container.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
+    }
+  }
+
+  // Background hearts
+  setInterval(() => {
+    createHearts(1);
+  }, 700);
 
 </script>
 
