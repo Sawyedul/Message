@@ -1,452 +1,663 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>A Little Question for Mizana 💫</title>
+<title>A Little Secret for Mizana 💗</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top, #ffb6d9, #8e44ad 45%, #24123b);
-      overflow: hidden;
-      color: white;
-    }
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Poppins", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #ffd6e8, transparent 30%),
+        radial-gradient(circle at 80% 80%, #e8c7ff, transparent 30%),
+        linear-gradient(135deg, #ff7eb3, #8e44ad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+}
 
-    .hearts {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+/* Floating hearts */
 
-    .heart {
-      position: absolute;
-      bottom: -50px;
-      font-size: 25px;
-      animation: floatUp linear forwards;
-      opacity: 0.8;
-    }
+.heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 22px;
+    pointer-events: none;
+    animation: floatHeart 6s linear forwards;
+    z-index: 0;
+}
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(0) rotate(0deg);
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) scale(0.7) rotate(0deg);
         opacity: 0;
-      }
+    }
 
-      20% {
+    15% {
         opacity: 1;
-      }
+    }
 
-      to {
-        transform: translateY(-110vh) rotate(360deg);
+    100% {
+        transform: translateY(-110vh) scale(1.4) rotate(360deg);
         opacity: 0;
-      }
     }
+}
 
-    .card {
-      width: min(92%, 550px);
-      min-height: 520px;
-      padding: 35px;
-      text-align: center;
-      border-radius: 30px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      position: relative;
-      z-index: 2;
-    }
+/* Main card */
 
-    .emoji {
-      font-size: 70px;
-      animation: pulse 1.5s infinite;
-    }
+.card {
+    width: min(92%, 520px);
+    min-height: 600px;
+    padding: 35px 28px;
+    text-align: center;
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
+    background: rgba(255,255,255,0.16);
+    backdrop-filter: blur(20px);
 
-      50% {
-        transform: scale(1.12);
-      }
-    }
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 35px;
 
-    h1 {
-      font-size: 34px;
-      margin: 15px 0;
-    }
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.3),
+        inset 0 1px 1px rgba(255,255,255,0.4);
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
+    position: relative;
+    z-index: 5;
 
-    .question {
-      font-size: 26px;
-      font-weight: bold;
-      margin: 35px 0;
-    }
+    animation: cardIn 1s ease;
+}
 
-    button {
-      border: none;
-      padding: 15px 28px;
-      border-radius: 50px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .yes {
-      background: #ff4f9a;
-      color: white;
-      box-shadow: 0 8px 25px rgba(255,79,154,0.4);
-    }
-
-    .yes:hover {
-      transform: scale(1.08);
-    }
-
-    .no {
-      background: white;
-      color: #8e44ad;
-      position: relative;
-      margin-left: 12px;
-    }
-
-    .progress {
-      margin-top: 25px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .reveal {
-      animation: reveal 0.7s ease;
-    }
-
-    @keyframes reveal {
-      from {
-        transform: scale(0.7);
+@keyframes cardIn {
+    from {
+        transform: translateY(30px) scale(.95);
         opacity: 0;
-      }
+    }
 
-      to {
-        transform: scale(1);
+    to {
+        transform: translateY(0) scale(1);
         opacity: 1;
-      }
+    }
+}
+
+/* Profile photo */
+
+.profile {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 6px solid rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.3);
+
+    margin-bottom: 15px;
+
+    animation: photoFloat 3s ease-in-out infinite;
+}
+
+@keyframes photoFloat {
+    0%,100% {
+        transform: translateY(0);
     }
 
-    .photo {
-      width: 160px;
-      height: 160px;
-      margin: 15px auto;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 70px;
-      background: linear-gradient(135deg, #ff9acb, #b46cff);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+h1 {
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 27px;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.question {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 15px 28px;
+    margin: 7px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+.yes {
+    background: linear-gradient(135deg,#ff4f9a,#ff79b7);
+    color: white;
+
+    box-shadow:
+        0 8px 25px rgba(255,79,154,.45);
+}
+
+.no {
+    background: white;
+    color: #8e44ad;
+
+    position: relative;
+}
+
+/* Cute badge */
+
+.badge {
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.18);
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Final screen */
+
+.final {
+    animation: finalReveal .8s ease;
+}
+
+@keyframes finalReveal {
+    from {
+        opacity: 0;
+        transform: scale(.7);
     }
 
-    .small {
-      font-size: 14px;
-      opacity: 0.75;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
-  </style>
+}
+
+.bigHeart {
+    font-size: 80px;
+    animation: heartbeat 1.1s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+.small {
+    font-size: 13px;
+    opacity: .7;
+}
+
+.sparkle {
+    font-size: 25px;
+}
+</style>
 </head>
+
 
 <body>
 
-<div class="hearts" id="hearts"></div>
+<div id="heartContainer"></div>
+
 
 <div class="card">
 
-  <!-- Question 1 -->
-  <div id="q1">
-    <div class="emoji">👋</div>
+    <!-- QUESTION 1 -->
 
-    <h1>Hey, Mizana Bibi!</h1>
+    <section id="question1">
 
-    <p>
-      I have a tiny three-question challenge for you.
-      Don't overthink it. 😄
-    </p>
+        <span class="badge">
+            💌 A tiny surprise
+        </span>
 
-    <div class="question">
-      Ready?
-    </div>
+        <br>
 
-    <button class="yes" onclick="nextQuestion(1)">
-      Yes 😌
-    </button>
+        <img
+            class="profile"
+            src="https://drive.google.com/thumbnail?id=1EojCoclG6hIewL4ajfZBQHYJgkbxSOHf&sz=w1000"
+            alt="Mizana Bibi"
+        >
 
-    <button class="no" onclick="nextQuestion(1)">
-      I'm curious 👀
-    </button>
+        <h1>
+            Hey, Mizana Bibi! 🌸
+        </h1>
 
-    <div class="progress">
-      Question 1 of 3
-    </div>
-  </div>
+        <p>
+            I have something completely random to ask you...
+            but first, you have to survive
+            <b>three tiny questions.</b> 😌
+        </p>
 
+        <div class="question">
+            Are you ready? 👀
+        </div>
 
-  <!-- Question 2 -->
-  <div id="q2" class="hidden">
+        <button class="yes" onclick="showQuestion(2)">
+            Yes 😌
+        </button>
 
-    <div class="emoji">✨</div>
+        <button class="yes" onclick="showQuestion(2)">
+            I'm curious 😂
+        </button>
 
-    <h1>Okay, Mizana...</h1>
+        <p class="small">
+            Question 1 of 3
+        </p>
 
-    <p>
-      Be honest. What would you do if someone suddenly
-      told you that you're really interesting?
-    </p>
-
-    <div class="question">
-      Would you smile? 😊
-    </div>
-
-    <button class="yes" onclick="nextQuestion(2)">
-      Obviously 😄
-    </button>
-
-    <button class="no" onclick="nextQuestion(2)">
-      Maybe...
-    </button>
-
-    <div class="progress">
-      Question 2 of 3
-    </div>
-  </div>
+    </section>
 
 
-  <!-- Question 3 -->
-  <div id="q3" class="hidden">
+    <!-- QUESTION 2 -->
 
-    <div class="emoji">💗</div>
+    <section id="question2" class="hidden">
 
-    <h1>Final Question</h1>
+        <div class="sparkle">
+            ✨ 💗 ✨
+        </div>
 
-    <p>
-      Okay... this is the serious one.
-    </p>
+        <h1>
+            Okay... interesting 👀
+        </h1>
 
-    <div class="question">
-      Do you love me? 👀
-    </div>
+        <p>
+            Imagine someone randomly making a cute little
+            website just to make you smile.
+        </p>
 
-    <button class="yes" onclick="answerYes()">
-      YES ❤️
-    </button>
+        <div class="question">
+            Would you smile? 😊
+        </div>
 
-    <button
-      class="no"
-      id="noButton"
-      onclick="answerNo()"
-      onmouseenter="dodgeNo()"
-      ontouchstart="dodgeNo()">
-      NO 😭
-    </button>
+        <button class="yes" onclick="showQuestion(3)">
+            Of course 💕
+        </button>
 
-    <p class="small">
-      Choose carefully... 😂
-    </p>
+        <button class="yes" onclick="showQuestion(3)">
+            Maybe 👀
+        </button>
 
-    <div class="progress">
-      Question 3 of 3
-    </div>
-  </div>
+        <p class="small">
+            Question 2 of 3
+        </p>
+
+    </section>
 
 
-  <!-- YES RESULT -->
-  <div id="yesResult" class="hidden reveal">
+    <!-- QUESTION 3 -->
 
-    <div class="photo">😂</div>
+    <section id="question3" class="hidden">
 
-    <h1>WAIT... WHAT?!</h1>
+        <div class="bigHeart">
+            💗
+        </div>
 
-    <p>
-      Mizana Bibi said <strong>YES!</strong> 😭❤️
-    </p>
+        <h1>
+            Mizana...
+        </h1>
 
-    <p>
-      Okay okay... don't panic.
-    </p>
+        <p>
+            Okay, no more silly questions.
+            This is the <b>important one.</b> 😳
+        </p>
 
-    <h2>IT WAS A PRANK! 😂</h2>
+        <div class="question">
+            Do you love me? ❤️
+        </div>
 
-    <p>
-      I got a dare from my friend to make this little
-      website and see what you would answer.
-    </p>
+        <button
+            class="yes"
+            onclick="sayYes()">
+            YES ❤️
+        </button>
 
-    <p>
-      You actually made it to the end. 😭😂
-    </p>
+        <button
+            class="no"
+            id="noButton"
+            onclick="sayNo()">
+            NO 😭
+        </button>
 
-  </div>
+        <p class="small">
+            Hmm... why is the NO button nervous? 😂
+        </p>
+
+        <p class="small">
+            Question 3 of 3
+        </p>
+
+    </section>
 
 
-  <!-- NO RESULT -->
-  <div id="noResult" class="hidden reveal">
+    <!-- YES RESULT -->
 
-    <div class="photo">😂</div>
+    <section id="yesResult" class="hidden final">
 
-    <h1>HAHA! 😭</h1>
+        <div class="bigHeart">
+            😂
+        </div>
 
-    <p>
-      You clicked NO!
-    </p>
+        <h1>
+            WAIT WHAT?! 😳
+        </h1>
 
-    <p>
-      Fair enough, Mizana. 😂
-    </p>
+        <h2>
+            Mizana said YES! ❤️
+        </h2>
 
-    <h2>THE PRANK IS OVER 🎉</h2>
+        <p>
+            I honestly wasn't prepared for that answer. 😭
+        </p>
 
-    <p>
-      I got a dare from my friend to create this
-      ridiculous little website.
-    </p>
+        <div class="bigHeart">
+            💕
+        </div>
 
-  </div>
+        <h2>
+            OKAY... IT WAS A PRANK! 😂
+        </h2>
+
+        <p>
+            I got a dare from my friend to make a
+            ridiculous little website and ask you
+            three questions.
+        </p>
+
+        <p>
+            And somehow you actually reached
+            the final question. 😂
+        </p>
+
+        <p>
+            <b>Thank you for playing along, Mizana! 🌸</b>
+        </p>
+
+    </section>
+
+
+    <!-- NO RESULT -->
+
+    <section id="noResult" class="hidden final">
+
+        <div class="bigHeart">
+            😂
+        </div>
+
+        <h1>
+            AHAHA! 😭
+        </h1>
+
+        <h2>
+            You chose NO!
+        </h2>
+
+        <p>
+            Respect. 😂❤️
+        </p>
+
+        <p>
+            The whole thing was actually a prank.
+            I got a dare from my friend to make
+            this silly little website.
+        </p>
+
+        <p>
+            At least you survived the three questions. 😌
+        </p>
+
+        <div class="bigHeart">
+            🌸
+        </div>
+
+    </section>
 
 </div>
 
 
 <script>
 
-  let dodgeCount = 0;
+/* ----------------------------------
+   QUESTION NAVIGATION
+---------------------------------- */
 
-  function nextQuestion(current) {
+function showQuestion(number) {
 
-    document.getElementById("q" + current)
-      .classList.add("hidden");
+    document.getElementById("question1")
+        .classList.add("hidden");
 
-    document.getElementById("q" + (current + 1))
-      .classList.remove("hidden");
-  }
+    document.getElementById("question2")
+        .classList.add("hidden");
+
+    document.getElementById("question3")
+        .classList.add("hidden");
+
+    document.getElementById("question" + number)
+        .classList.remove("hidden");
+}
 
 
-  function dodgeNo() {
+/* ----------------------------------
+   PLAYFUL NO BUTTON
+---------------------------------- */
 
-    const button = document.getElementById("noButton");
+const noButton = document.getElementById("noButton");
+
+let dodgeCount = 0;
+
+function moveNoButton() {
 
     dodgeCount++;
 
     /*
-      The button moves around the card,
-      but remains clickable.
+       The button starts moving after
+       the cursor gets close to it.
     */
 
-    const card = document.querySelector(".card");
+    noButton.style.position = "fixed";
 
-    const cardRect = card.getBoundingClientRect();
+    const padding = 20;
 
-    const maxX = cardRect.width - button.offsetWidth - 30;
-    const maxY = cardRect.height - button.offsetHeight - 30;
+    const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        padding;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        padding;
 
-    button.style.position = "fixed";
-    button.style.left = (cardRect.left + x) + "px";
-    button.style.top = (cardRect.top + y) + "px";
+    const randomX =
+        Math.max(
+            padding,
+            Math.random() * maxX
+        );
 
-    /*
-      After several dodges, slow it down slightly
-      so the user can still choose NO.
-    */
+    const randomY =
+        Math.max(
+            padding,
+            Math.random() * maxY
+        );
 
-    if (dodgeCount >= 8) {
-      button.style.transform =
-        "rotate(" + (Math.random() * 20 - 10) + "deg)";
+    noButton.style.left =
+        randomX + "px";
+
+    noButton.style.top =
+        randomY + "px";
+
+    noButton.style.transform =
+        "rotate(" +
+        (Math.random() * 20 - 10) +
+        "deg)";
+}
+
+
+/*
+   Move the NO button repeatedly while
+   the pointer is near it.
+
+   The interval is 450ms, so it moves
+   a little more than twice per second.
+*/
+
+noButton.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+noButton.addEventListener(
+    "touchstart",
+    moveNoButton
+);
+
+
+/*
+   After several dodges, let the button
+   stay still occasionally so NO remains
+   genuinely clickable.
+*/
+
+let dodgeTimer = setInterval(() => {
+
+    if (dodgeCount > 0 && dodgeCount < 8) {
+        moveNoButton();
     }
-  }
+
+}, 450);
 
 
-  function answerYes() {
+/* ----------------------------------
+   ANSWERS
+---------------------------------- */
 
-    document.getElementById("q3")
-      .classList.add("hidden");
+function sayYes() {
+
+    document.getElementById("question3")
+        .classList.add("hidden");
 
     document.getElementById("yesResult")
-      .classList.remove("hidden");
+        .classList.remove("hidden");
 
     createHearts(35);
-  }
+}
 
 
-  function answerNo() {
+function sayNo() {
 
-    document.getElementById("q3")
-      .classList.add("hidden");
+    document.getElementById("question3")
+        .classList.add("hidden");
 
     document.getElementById("noResult")
-      .classList.remove("hidden");
+        .classList.remove("hidden");
 
-    createHearts(15);
-  }
+    clearInterval(dodgeTimer);
+
+    createHearts(20);
+}
 
 
-  function createHearts(amount) {
+/* ----------------------------------
+   FLOATING HEARTS
+---------------------------------- */
 
-    const container = document.getElementById("hearts");
+function createHeart() {
 
-    for (let i = 0; i < amount; i++) {
+    const heart =
+        document.createElement("div");
 
-      const heart = document.createElement("div");
+    heart.className = "heart";
 
-      heart.className = "heart";
+    const emojis = [
+        "❤️",
+        "💕",
+        "💗",
+        "💖",
+        "💘",
+        "✨",
+        "🌸"
+    ];
 
-      const emojis = ["❤️", "💕", "💗", "💖", "✨", "😂"];
+    heart.innerHTML =
+        emojis[
+            Math.floor(
+                Math.random() *
+                emojis.length
+            )
+        ];
 
-      heart.innerHTML =
-        emojis[Math.floor(Math.random() * emojis.length)];
+    heart.style.left =
+        Math.random() * 100 + "vw";
 
-      heart.style.left =
-        Math.random() * 100 + "%";
+    heart.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
 
-      heart.style.animationDuration =
-        (4 + Math.random() * 5) + "s";
+    document
+        .getElementById("heartContainer")
+        .appendChild(heart);
 
-      heart.style.animationDelay =
-        Math.random() * 2 + "s";
-
-      container.appendChild(heart);
-
-      setTimeout(() => {
+    setTimeout(() => {
         heart.remove();
-      }, 10000);
-    }
-  }
+    }, 9000);
+}
 
-  // Background hearts
-  setInterval(() => {
-    createHearts(1);
-  }, 700);
+
+function createHearts(number) {
+
+    for (let i = 0; i < number; i++) {
+
+        setTimeout(
+            createHeart,
+            i * 80
+        );
+    }
+}
+
+
+/* Continuous background hearts */
+
+setInterval(
+    createHeart,
+    800
+);
 
 </script>
 
 </body>
 </html>
-```
